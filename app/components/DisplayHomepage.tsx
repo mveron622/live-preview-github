@@ -43,6 +43,7 @@ const DisplayHomepage = () => {
         newComponents.push({
           type: "account_greeting",
           data: entry[0].account_greeting,
+          audience: entry[0].audience?.audience || 'guest'
         });
       }
 
@@ -71,12 +72,16 @@ const DisplayHomepage = () => {
   return (
     <div>
       {components.map((component, index) => {
-        // console.log("component:", component);
         switch (component.type) {
-          case "account_greeting":
+          case "account_greeting":{
             return (
-              <AccountGreeting key={index} account_greeting={component.data} />
+              <AccountGreeting 
+                key={index} 
+                account_greeting={component.data} 
+                audience={component.audience}
+              />
             );
+          }
           case "asset_with_text_block_large_card":
           case "top_offers_carousel":
           case "recommendation_carousel":

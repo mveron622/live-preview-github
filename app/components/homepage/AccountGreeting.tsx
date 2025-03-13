@@ -24,9 +24,10 @@ interface AccountGreetingProps {
             color_contrast: string;
         };
     }>;
+    audience: string;
 }
 
-const AccountGreeting = ({ account_greeting }: AccountGreetingProps) => {
+const AccountGreeting = ({ account_greeting, audience }: AccountGreetingProps) => {
     const [greetingPrimaryHeading, setGreetingPrimaryHeading] = useState<string | undefined>(undefined);
     const [greetingSecondaryHeading, setGreetingSecondaryHeading] = useState<string | undefined>(undefined);
     const [greetingBody, setGreetingBody] = useState<string | undefined>(undefined);
@@ -39,9 +40,15 @@ const AccountGreeting = ({ account_greeting }: AccountGreetingProps) => {
 
     useEffect(() => {
         if (account_greeting?.[0]) {
-            const { color_contrast } = account_greeting[0];
-            setBackgroundColor(colors[0]);
-            setTextColor(color_contrast.color_contrast === 'light-background-dark-text' ? colors[2] : colors[1]);
+            const { color_palette, color_contrast } = account_greeting[0];
+            const colors = color_palette.color_palette.split(',');
+            if (audience === 'member') {
+                setBackgroundColor(colors[0]);
+                setTextColor(color_contrast.color_contrast === 'light-background-dark-text' ? colors[2] : colors[1]);
+            } else if (audience === 'guest') {
+                setBackgroundColor('#FFFFFF');
+                setTextColor('text-inverted');
+            }
 
             setGreetingImage(account_greeting?.[0].greeting_image.image_file?.asset.url || "");
             setGreetingPrimaryHeading(account_greeting?.[0].greeting_primary_heading || "");
@@ -54,7 +61,7 @@ const AccountGreeting = ({ account_greeting }: AccountGreetingProps) => {
             }));
             setButtons(btns);
         }
-    }, [account_greeting]);
+    }, [account_greeting, audience]);
 
     return (
         <div className="relative px-[16px] pb-[24px] pt-[48px] rounded-lg shadow-md" style={{ backgroundColor }}>
@@ -81,15 +88,15 @@ const AccountGreeting = ({ account_greeting }: AccountGreetingProps) => {
                 <h3 className="text-2xl" style={{ color: colors[2] }}>{greetingSecondaryHeading}</h3>
             )}
             {greetingBody && (
-                <p className="mb-4" style={{ color: textColor }}>{greetingBody}</p>
+                <p className="mb-4 text-inverted">{greetingBody}</p>
             )}
             <div className="flex space-x-2">
                 {buttons.map((btn, index) => (
                     <a 
                         key={index} 
                         href={btn.link} 
-                        className="rounded-full px-4 py-2 hover:bg-opacity-80 transition"
-                        style={{ backgroundColor: textColor, color: backgroundColor }}
+                        className="rounded-md px-[20px] py-[12px] hover:bg-opacity-80 transition"
+                        style={{ backgroundColor: colors[2], color: backgroundColor }}
                     >
                         {btn.label}
                     </a>
