@@ -49,12 +49,12 @@ const HomeEnding = ({
         <img
           src={homeEndingImage}
           alt="home ending"
-          className="w-12 h-12 object-cover mx-auto mt-8"
+          className="w-16 h-16 object-cover mx-auto mt-8"
         />
       )}
-      {homeEndingText && <p>{homeEndingText}</p>}
+      {homeEndingText && <p className="text-brand font-bold text-xl mt-4">{homeEndingText}</p>}
       {homeEndingButton && (
-        <button className="btn rounded border border-gray-500 p-2 mt-2 mb-2 mr-1 mx-auto">
+        <button className="btn rounded-md border border-[#0002] p-2 mt-4 mx-auto text-inverted">
           {homeEndingButton}
         </button>
       )}

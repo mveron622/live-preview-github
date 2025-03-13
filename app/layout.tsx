@@ -25,12 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LivePreviewProvider>
-          <div className="flex justify-center items-center bg-gray-100">
-            <div className="w-full max-w-xs p-6 bg-white rounded-lg shadow-lg">
+          <div className="min-h-screen bg-gray-800 p-8 flex justify-center">
+            <div className="w-[393px] bg-white min-h-screen shadow-2xl rounded-t-3xl">
               {children}
             </div>
           </div>

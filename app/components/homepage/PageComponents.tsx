@@ -1,116 +1,83 @@
-import { useEffect, useState } from "react";
-
-interface AssetWithTextBlockLargeCardProps {
-  _content_type_uid: "asset_with_text_block_large_card";
-  title: string;
-  image?: {
-    image_file: {
-      asset: {
-        url: string;
-      };
-    };
-  };
-  video?: {
-    video_file: {
-      url: string;
-    };
-  };
-  thematic_card_type_fields: {
-    headline: string;
-    body: string;
-  };
-}
-
-interface TopOffersCarouselProps {
-  _content_type_uid: "top_offers_carousel";
-  title: string;
-  top_offers_carousel_headline: string;
-  background_with_image_cards: any[];
-}
-
-interface RecommendationCarouselProps {
-  _content_type_uid: "recommendation_carousel";
-  title: string;
-  recommendation_headline: string;
-}
-
-interface VideoLargeCardProps {
-  _content_type_uid: "video_large_card";
-  title: string;
-  card_type: string;
-  video: { video_file_link: { url: string } };
-}
-
-interface VisualNavigationCarouselProps {
-  _content_type_uid: "visual_navigation_carousel";
-  headline: string;
-  visual_navigation_carousel: any[];
-}
-
-type PageComponent =
-  | AssetWithTextBlockLargeCardProps
-  | TopOffersCarouselProps
-  | RecommendationCarouselProps
-  | VideoLargeCardProps
-  | VisualNavigationCarouselProps;
+import React from 'react';
+import { 
+  PageComponent, 
+  AssetWithTextBlockLargeCardProps,
+  TopOffersCarouselProps,
+  RecommendationCarouselProps,
+  VideoLargeCardProps,
+  VisualNavigationCarouselProps
+} from '../common/types';
+import AssetWithTextBlockLargeCard from '../common/AssetWithTextBlockLargeCard';
+import TopOffersCarousel from '../common/TopOffersCarousel';
+import VideoLargeCard from '../common/VideoLargeCard';
+import VisualNavigationCarousel from '../common/VisualNavigationCarousel';
 
 const PageComponents = ({ component }: { component: PageComponent }) => {
   switch (component._content_type_uid) {
-    case "asset_with_text_block_large_card":
+    case "asset_with_text_block_large_card": {
+      const assetCard = component as AssetWithTextBlockLargeCardProps;
       return (
-        <div>
-          {component.image?.image_file?.asset?.url && (
-            <img
-              src={component.image.image_file.asset.url}
-              alt={component.title}
-            />
-          )}
-          {component.video?.video_file?.url && (
-            <video
-              src={component.video.video_file.url}
-              controls
-              width="320"
-              height="240"
-            />
-          )}
-          <h2>{component.thematic_card_type_fields.headline}</h2>
-          <p>{component.thematic_card_type_fields.body}</p>
-        </div>
+        <AssetWithTextBlockLargeCard 
+          title={assetCard.title}
+          card_type={assetCard.card_type}
+          thematic_card_type_fields={assetCard.thematic_card_type_fields}
+          multi_price_promotion={assetCard.multi_price_promotion}
+          promotion={assetCard.promotion}
+          cta_label={assetCard.cta_label}
+          image={assetCard.image}
+          color_palette={assetCard.color_palette}
+          color_contrast={assetCard.color_contrast}
+        />
       );
+    }
 
-    case "top_offers_carousel":
+    case "top_offers_carousel": {
+      const topOffers = component as TopOffersCarouselProps;
       return (
-        <div>
-          <h2>{component.top_offers_carousel_headline}</h2>
-        </div>
+        <TopOffersCarousel
+          _content_type_uid={topOffers._content_type_uid}
+          title={topOffers.title}
+          top_offers_carousel_headline={topOffers.top_offers_carousel_headline}
+          background_with_image_cards={topOffers.background_with_image_cards}
+        />
       );
+    }
 
-    case "recommendation_carousel":
+    case "recommendation_carousel": {
+      const recommendations = component as RecommendationCarouselProps;
       return (
-        <div>
-          <h2>{component.recommendation_headline}</h2>
+        <div className="px-[16px] py-[24px]">
+          <h2 className="text-2xl font-bold mb-[16px] text-inverted">{recommendations.recommendation_headline}</h2>
+          <div className='rounded-md overflow-hidden border border-[#0002] h-[200px]'>
+            <p className='text-inverted text-lg text-center'>Recommendation Carousel</p>
+          </div>
         </div>
       );
+    }
 
-    case "video_large_card":
+    case "video_large_card": {
+      const videoCard = component as VideoLargeCardProps;
       return (
-        <div>
-          <video
-            src={component?.video?.video_file_link?.url}
-            controls
-            width="320"
-            height="240"
-          />
-          <h2>{component.title}</h2>
-        </div>
+        <VideoLargeCard
+          title={videoCard.title}
+          card_type={videoCard.card_type}
+          video={videoCard.video}
+          description={videoCard.description}
+          thumbnail={videoCard.thumbnail}
+        />
       );
+    }
 
-    case "visual_navigation_carousel":
+    case "visual_navigation_carousel": {
+      const visualNav = component as VisualNavigationCarouselProps;
       return (
-        <div>
-          <h2>{component.headline}</h2>
-        </div>
+        <VisualNavigationCarousel
+          title={visualNav.title}
+          visual_navigation_carousel={visualNav.visual_navigation_carousel}
+          headline={visualNav.headline}
+        />
       );
+    }
 
     default:
       return null;

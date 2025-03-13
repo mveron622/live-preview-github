@@ -22,6 +22,13 @@ type GetEntryByUrl = {
   jsonRtePath: string[] | undefined;
 };
 
+type GetEntryByUID = {
+  contentTypeUid: string;
+  entryUid: string;
+  referenceFieldPath: string[] | undefined;
+  jsonRtePath: string[] | undefined;
+};
+
 export const NEXT_PUBLIC_CONTENTSTACK_API_KEY =
   process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY;
 export const NEXT_PUBLIC_CONTENTSTACK_APP_HOST =
@@ -128,5 +135,44 @@ export const getEntryByUrl = ({
         reject(error);
       }
     );
+  });
+};
+
+/**
+ * Fetches a specific entry by its UID from a content-type
+ * 
+ * @param {* content-type uid} contentTypeUid
+ * @param {* entry uid} entryUid
+ * @param {* reference field name} referenceFieldPath
+ * @param {* Json RTE path} jsonRtePath
+ * @returns Promise resolving to the entry
+ */
+export const getEntryByUID = ({
+  contentTypeUid,
+  entryUid,
+  referenceFieldPath,
+  jsonRtePath,
+}: GetEntryByUID) => {
+  return new Promise((resolve, reject) => {
+    const query = Stack.ContentType(contentTypeUid).Entry(entryUid);
+    if (referenceFieldPath) query.includeReference(referenceFieldPath);
+    query
+      .toJSON()
+      .fetch()
+      .then(
+        (result) => {
+          jsonRtePath &&
+            Utils.jsonToHTML({
+              entry: result,
+              paths: jsonRtePath,
+              renderOption,
+            });
+          resolve(result);
+        },
+        (error) => {
+          console.error('Error fetching entry:', error);
+          reject(error);
+        }
+      );
   });
 };

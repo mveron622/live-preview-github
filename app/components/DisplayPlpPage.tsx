@@ -9,6 +9,7 @@ import GridPageCard from "./plp/GridPageCard";
 
 const DisplayPlpPage = () => {
   const [components, setComponents] = useState<any[]>([]);
+  console.log("PLP");
 
   // URL params
   const params = useParams(); // This returns the parameters from the route
