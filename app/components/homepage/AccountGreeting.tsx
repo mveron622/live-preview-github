@@ -96,7 +96,7 @@ const AccountGreeting = ({ account_greeting, audience }: AccountGreetingProps) =
                         key={index} 
                         href={btn.link} 
                         className="rounded-md px-[20px] py-[12px] hover:bg-opacity-80 transition"
-                        style={{ backgroundColor: colors[2], color: backgroundColor }}
+                        style={{ backgroundColor: colors[1], color: backgroundColor }}
                     >
                         {btn.label}
                     </a>
