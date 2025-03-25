@@ -17,7 +17,6 @@ const DeliveryOptions = ({ delivery_options }: DeliveryOptionsProps) => {
     delivery_options?.delivery_options?.[0]?.delivery_options_items.forEach(
       (delivery_option: any) => {
         // Debugging.
-        //console.log("delivery_option:", delivery_option);
 
         // Pick-up item.
         if (delivery_option?.pick_up_item) {

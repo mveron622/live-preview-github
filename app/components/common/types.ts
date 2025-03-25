@@ -204,6 +204,23 @@ export type ImageAsset = {
     };
     description?: string;
     thumbnail?: Image;
+    color_palette: string;
+    extended_color_contrast: string;
+    full_asset: {
+      cta_label: {
+        cta_label: string;
+      };
+    }
+    shoppable_video: {
+      color_palette: {
+        color_palette: string;
+      };
+      extended_color_contrast: {
+        extended_color_contrast: string;
+      };
+      headline: string;
+      body: string;
+    };
   }
 
   // Visual Navigation Carousel

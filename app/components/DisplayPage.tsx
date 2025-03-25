@@ -133,8 +133,6 @@ const DisplayPage = () => {
 
       // Set the components array in state
       setComponents(newComponents);
-
-      console.log("Retrieved Entry:", entry);
     };
 
     fetchData();

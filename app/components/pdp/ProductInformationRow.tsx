@@ -29,10 +29,6 @@ const ProductInformationRow = ({
   );
 
   useEffect(() => {
-    // Debugging.
-    // console.log("type", type);
-    // console.log("product_information_row", product_information);
-
     // Set section heading.
     if (type === "overview") {
       setSectionHeading("Overview");

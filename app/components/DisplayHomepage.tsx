@@ -34,9 +34,6 @@ const DisplayHomepage = () => {
         ],
         jsonRtePath: undefined,
       });
-
-      console.log("entry:", entry);
-
       // Iterate over each component in homepage_components and dynamically push to state
       const newComponents: any[] = [];
       if (entry?.[0]?.account_greeting) {

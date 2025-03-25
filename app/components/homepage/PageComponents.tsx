@@ -58,13 +58,7 @@ const PageComponents = ({ component }: { component: PageComponent }) => {
     case "video_large_card": {
       const videoCard = component as VideoLargeCardProps;
       return (
-        <VideoLargeCard
-          title={videoCard.title}
-          card_type={videoCard.card_type}
-          video={videoCard.video}
-          description={videoCard.description}
-          thumbnail={videoCard.thumbnail}
-        />
+        <VideoLargeCard cardData={videoCard} />
       );
     }
 

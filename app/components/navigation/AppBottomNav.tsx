@@ -105,8 +105,6 @@ const AppBottomNav = () => {
       if (app_bottom_nav_entries[0][0]?.app_bottom_nav_items) {
         setChildNavItems(app_bottom_nav_entries[0][0].app_bottom_nav_items);
       }
-
-      console.log("HELOO", app_bottom_nav_entries[0][0].app_bottom_nav_items);
     };
 
     fetchData();
@@ -115,11 +113,9 @@ const AppBottomNav = () => {
   const handleClick = (index: number) => {
     setSelectedItem(index);
     const clickedItem = childNavItems?.[index];
-    console.log("clickedItem:", clickedItem);
     if (clickedItem) {
       if ("child_nav_items" in clickedItem) {
         setChildItems(clickedItem.child_nav_items);
-        console.log("weee: ", clickedItem.child_nav_items);
       } else {
         setChildItems(undefined);
       }

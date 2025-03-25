@@ -18,8 +18,6 @@ const ProductImages = ({ product_images }: ProductImagesProps) => {
   );
 
   useEffect(() => {
-    // Debugging.
-    // console.log("product_images", product_images);
     if (product_images?.[0]?.product_image?.url) {
       setProductImage(product_images?.[0]?.product_image?.url || "");
     }

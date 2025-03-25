@@ -115,7 +115,6 @@ export const getEntryByUrl = ({
   jsonRtePath,
 }: GetEntryByUrl) => {
   return new Promise((resolve, reject) => {
-    console.log("Find entry of type ", contentTypeUid, "with url", entryUrl);
     const blogQuery = Stack.ContentType(contentTypeUid).Query();
     if (referenceFieldPath) blogQuery.includeReference(referenceFieldPath);
     blogQuery.toJSON();
@@ -156,6 +155,7 @@ export const getEntryByUID = ({
   return new Promise((resolve, reject) => {
     const query = Stack.ContentType(contentTypeUid).Entry(entryUid);
     if (referenceFieldPath) query.includeReference(referenceFieldPath);
+
     query
       .toJSON()
       .fetch()

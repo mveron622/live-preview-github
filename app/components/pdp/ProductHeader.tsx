@@ -16,12 +16,6 @@ const ProductHeader = ({ product_header }: ProductHeaderProps) => {
   );
 
   useEffect(() => {
-    // Debugging.
-    // console.log(
-    //   "product_header",
-    //   product_header,
-    //   product_header?.product_header?.[0]?.title
-    // );
     if (product_header?.product_header?.[0]?.title) {
       setProductTitle(product_header?.product_header?.[0]?.title || "");
     }
